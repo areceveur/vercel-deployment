@@ -17,9 +17,7 @@ app.add_middleware(
 )
 
 app.include_router(newsletter_route)
-@app.get("/")
-@app.head("/")
-
+@app.api_router("/", methods=["GET", "HEAD"])
 async def root():
     return {
         "status": "ok", 
@@ -27,8 +25,7 @@ async def root():
         "timestamp": datetime.utcnow().isoformat()
     }
 
-@app.get("/health")
-@app.head("/health")
+@app.api_route("/health", methods=["GET", "HEAD"])
 
 async def health_check():
     return {
