@@ -18,6 +18,7 @@ app.add_middleware(
 
 app.include_router(newsletter_route)
 @app.get("/")
+@app.head("/")
 
 async def root():
     return {
