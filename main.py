@@ -5,6 +5,15 @@ import os
 import uvicorn
 from newsletter.routes import router as newsletter_route
 app = FastAPI()
+@app.get("/health")
+
+async def health_check():
+    return {
+        "status": "ok", 
+        "service": "newsletter-api",
+        "timestamp": datetime.utcnow().isoformat()
+    }
+
 Base.metadata.create_all(bind=engine)
 app.include_router(newsletter_route)
 
