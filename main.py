@@ -5,7 +5,27 @@ from database.database import get_db , engine , Base
 import os
 import uvicorn
 from newsletter.routes import router as newsletter_route
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(newsletter_route)
+@app.get("/")
+
+async def root():
+    return {
+        "status": "ok", 
+        "service": "newsletter-api",
+        "timestamp": datetime.utcnow().isoformat()
+    }
+
 @app.get("/health")
 
 async def health_check():
@@ -15,16 +35,8 @@ async def health_check():
         "timestamp": datetime.utcnow().isoformat()
     }
 
-Base.metadata.create_all(bind=engine)
-app.include_router(newsletter_route)
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+Base.metadata.create_all(bind=engine)
 
 
 if __name__ == "__main__":
