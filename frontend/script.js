@@ -1,4 +1,4 @@
-const API_URL = 'https://ton-render-url.onrender.com'; // Remplace par ton URL Render !
+const API_URL = 'https://vercel-deployment-juh9.onrender.com';
 
 async function testHealth() {
   showLoading();
