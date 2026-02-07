@@ -1,4 +1,4 @@
-const API_URL = 'https://vercel-deployment-juh9.onrender.com';
+const API_URL = 'https://vercel-deployment-bay-theta.vercel.app';
 
 async function testHealth() {
   showLoading();
